@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Billing System</title>
+    <link rel="stylesheet" href="./src/output.css" />
+  </head>
+  <body id="bodyele" class="bg-[#0e0e11] flex justify-center flex-col text-white w-screen h-screen overflow-hidden overflow-scroll">
+    <div id="header" class="flex w-screen justify-center fixed border-b-[1px] border-[#3b82f6] top-0 backdrop-blur-3xl bg-black">
+      <h1 class="md:text-4xl text-2xl p-5 font-semibold text-white shadow-lg w-screen flex justify-center text-center items-center h-5"><span class="text-white text-4xl">P</span>ooja &nbsp; <span class="text-white text-4xl">S</span>ales</h1>
+    </div>w-full
+    <Div class="flex m-5 md:mt-[100px] mt-[150px]">
+      <h2 class="md:text-3xl text-xl font-medium">GST Invoice</h2>
+    </Div>
+    <div id="main" class="flex justify-center w-screen bottom-[1px] md:mt-10 border-white h-[100%] z-1">
+      <div id="container " class="flex flex-col md:w- w-screen items-center">
+
+        <div id="info" class="flex md:flex-row flex-col font-semibold mx-8 justify-between md:items-center md:w-[90%] w-[90%] bg-blue-500 md:p-4 p-10">
+          <label for="invoice_no" class="md:m-0 mb-2 ">Invoice No: </label>
+          <input id="invoice_no" class=" h-8 p-4 outline-none text-black" type="text" placeholder="#No" >
+
+          <label for="CustomerName" class=" mb-2 mt-2">Customer Name: </label>
+            <select id="CustomerName" class="h-8 md:m-0 outline-none bg-white px-3 text-black ">
+                <option value="defaults" class="text-gray-900 text-sm" selected>Select Customer</option>
+            </select>
+            <input type="button" id="AddCustomer" class="md:m-0 mb-2 mt-2 h-8 md:px-2 text-black bg-white" value="+">
+            
+          <label for="MobileNo">Mobile No: </label>  <span id="MobileNo" class="HardInfo  mb-2 mt-2 h-8 text-black bg-white px-3 pt-1" disabled></span>
+
+          <label for="Date">Date : </label> <span id="Date" class="HardInfo mb-2 mt-2 h-8 text-black bg-white px-3 pt-1" disabled></span>
+
+        </div>
+        <Div class="flex flex-row mt-5 md:w-[100%] w-screen">
+          <h2 class="md:text-3xl text-xl font-medium ml-5">Add Products</h2>
+        </Div>
+        <div id="bill_info" class="md:w-[90%] w-screen mt-3 pb-[100px]">
+
+            <div class="billInput flex flex-col items-center justify-center w-screen p-0 md:w-full w-screen h-auto">
+              <div id="ProductInfo" class="flex my-2 md:flex-row flex-col font-semibold justify-between md:items-center md:w-[99%] w-[90%] h-auto bg-blue-500 md:p-4 p-10">
+                <label>Sr No.</label>
+                <input class="md:m-0 md:w-[50px] mb-2 mt-2 h-8 text-black bg-white md:px-3 px-4" type="text" field="srNo" placeholder="1" disabled>
+                
+                <label >Product</label>
+                <select field="Product" class="productClass md:m-0 md:w-50 mb-2 mt-2 h-8 text-black bg-white px-4 " onchange="getSelectedProduct(1)" placeholder="Product">
+                  <option selected>Select Product</option>
+                </select>         
+
+                <label >Qty</label>
+                <input type="text" field="Qty" class="qtyClass md:m-0 md:w-24 mb-2 mt-2 h-8 text-black bg-white px-4 " oninput="fillTotals()" placeholder="Quantity" >      
+
+                <label >Rate</label>
+                <input type="text" field="Rate" class="rateClass md:m-0 md:w-24 mb-2 mt-2 h-8 text-black bg-white px-4 "  placeholder="0" disabled>
+
+                <label>Total</label>
+                <input type="text" field="Total" class="totalClass md:m-0 md:w-[8rem] mb-2 mt-2 h-8 text-black bg-white px-4"  placeholder="Total" disabled >
+
+              </div>
+            </div>
+        </div>
+
+        <div class="buttons flex fixed bottom-0 bg-black md:w-full w-screen justify-between p-3 z-50 md:px-[7cm]">
+          <ion-icon size="large" onclick="AddNewProduct()" name="add-circle-outline"></ion-icon>
+          <ion-icon size="large" name="remove-circle-outline" onclick="removeLastProduct()"></ion-icon>
+          <ion-icon id="print" size="large" onclick="printBill()" name="print-outline"></ion-icon>
+          <ion-icon size="large"  name="refresh-circle-outline" value="Refresh" onclick="refresh()"></ion-icon>
+          <ion-icon size="large" name="reorder-two-outline"onclick="ShowTotals()"></ion-icon>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="FinalValues" class="bottom-[6%] bottom-[-93%] transition-all ease-in-out duration-300 flex flex-col mt-10 justify-between w-full items-center  fixed bg-blue-400 bg-opacity-80 font-semibold backdrop-blur-lg p-10 z-40">
+      <button onclick="ShowTotals()">Close</button>
+      <div class="ValuesContainer flex mt-10 justify-between w-full items-center  ">
+        <label for="TaxableAmount">Taxable Amount: </label>&nbsp;<span id="TaxableAmount" class="FinalValueElements"><b>0</b>
+      </div>
+      <div class="ValuesContainer flex mt-10 justify-between w-full items-center  ">
+        <label for="SGST">SGST: </label>9.0%<span id="SGST" class="FinalValueElements"><b>0</b></span>
+      </div>
+      <div class="ValuesContainer flex mt-10 justify-between w-full items-center  ">
+        <label for="CGST">CGST: </label>9.0%<span id="CGST" class="FinalValueElements"><b>0</b></span>
+      </div>
+      <div class="ValuesContainer flex mt-10 justify-between w-full items-center  ">
+        <label for="RoundOff">Round Off: </label>&nbsp;<span id="RoundOff" class="FinalValueElements"><b>0</b></span>
+      </div>
+      <div class="ValuesContainer flex mt-10 justify-between w-full items-center  ">
+        <label for="GrandTotal">GrandTotal: </label>&nbsp;<span id="GrandTotal" class="FinalValueElements"><b>0</b></span>
+      </div>  
+    </div>  
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="./src/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill</title>
+    <link rel="stylesheet" href="/src/bill2.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+
+<body id="body">
+        <!-- <button onclick="printMe()">Print</button> -->
+        <button onclick="generatePDF()">Download PDF</button>
+        <button onclick="printMe()" id="printme">Print</button>
+
+    <table id="tab">
+        <tr id="row1">
+            <td id="mainHeading" colspan="7">
+                <h1>POOJA SALES<h1>
+            </td>
+        </tr>
+        <tr id="row2">
+            <td id="ShopAddress" colspan="7">
+                <p>Automobiles & Industrial Oil Suppliers
+                </p>
+                <p>
+                    Gat No 280 Chakan Road Hanumanwadi Kelgaon Alandi
+                </p>
+                <p>
+                    <b>Cell:</b>&nbsp; 9373734315/9623316234 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <b>E-mail:</b>&nbsp; ganeshjogdand789@gmail.com
+                </p>
+            </td>
+
+        </tr>
+
+        <tr id="row3">
+            <td id="memo" colspan="7">
+                <div>
+                    <b>Debit Memo</b>
+                    <b>TAX INVOICE</b>
+                    <b>Original</b>
+                </div>
+            </td>
+        </tr>
+        </tr>
+        <tr>
+            <td id="custinfo" rowspan="2" colspan="4">
+                <div id="customerName">
+                    <b>M/s. :</b> <span id="name"></span>
+                </div>
+                <div id="customerAddress">
+                    <span id="cAddress">Pune</span>
+                </div>
+                <div id="otherDetails">
+                    <div id="POSupply">
+                        <b>Place of Supply :</b> <span>27-Maharashtra</span>
+                    </div>
+                    <div id="CustomerMobileNo">
+                        <b>Mob No.:</b> <span id="cMobNo">9595301547 </span>
+                    </div>
+                </div>
+                <div id="customerGSTIN">
+                    <b>GSTIN No. :</b> <span id="cGSTIN"></span>
+                </div>
+            </td>
+            <td id="billinfo" colspan="3">
+                <div id="invoiceNo">
+                    <b>Invoice No. :</b> <span id="iNo"></span>
+                </div>
+                <div id="date">
+                    <b>Date:</b> <span id="bDate"></span>
+                </div>
+            </td>
+
+        </tr>
+        <tr>
+            <td id="blackSpace" colspan="3">
+                <div>
+
+                </div>
+            </td>
+        </tr>
+        <tr id="row5">
+            <th id="SrNo">
+                Sr No
+            </th>
+            <th id="ProductName" class="middle-th-row4">
+                Product Name
+            </th>
+            <th id="hsn" class="middle-th-row4">
+                HSN/SAC
+            </th>
+            <th id="qty" class="middle-th-row4">
+                QTY
+            </th>
+            <th id="rate" class="middle-th-row4">
+                Rate
+            </th>
+            <th id="gst" class="middle-th-row4">
+                GST%
+            </th>
+            <th id="amt">
+                Amount
+            </th>
+        </tr>
+        <tr class="mainData">
+            <td id="" class="data" >
+                <div id="SrNumbers"  style="margin-top:10px; display: flex; flex-direction: column; width: 100%; height: 100%; align-items: center;">
+                    <span></span>  <span></span>  <span></span>  <span></span>  <span></span>  <span></span>
+                </div>
+            </td>
+            <td id="" class="data border-m">
+                <div id="ProductNames" style="margin-top:10px; display: flex; flex-direction: column; width: 100%; height: 100%; align-items: center;">
+                    <span></span>
+
+                </div>            
+            </td>
+            <td id="" class="data border-m">
+                <div id="hsns"  style="margin-top:10px; display: flex; flex-direction: column; width: 100%; height: 100%; align-items: center;">
+                    <span></span>
+                </div>            
+            </td>
+            <td id="" class="data border-m">
+                <div id="qtys" style="margin-top:10px; display: flex; flex-direction: column; width: 100%; height: 100%; align-items: center;">
+                    <span></span>
+                </div>
+            </td>
+            <td id="" class="data border-m">
+                <div id="rates" style="margin-top:10px; display: flex; flex-direction: column; width: 100%; height: 100%; align-items: center;">
+                    <span></span>
+                </div>
+            </td>
+            <td id="" class="data border-m ">
+                <div id="gsts" style="margin-top:10px; display: flex; flex-direction: column; width: 100%; height: 100%; align-items: center;">
+                    <span></span>
+                </div>            </td>
+            <td id="" class="data last-b">
+                <div id="amounts" style="margin-top:10px; display: flex; flex-direction: column; width: 100%; height: 100%; align-items: center;">
+                    <span></span>
+                </div>            
+            </td>
+        </tr>
+
+        
+        <tr>
+            <td colspan="4" style="border: 1px solid black;">
+
+                <div style="display: flex; padding-left: 4px; padding-right: 4px; font-weight: bold;">
+                    GSTIN No.: <span id="custGSTIN" style="padding-left: 5px;"> GS3923929322393</span>
+            </td>
+            <td colspan="3" style="border-left: none;">
+                <div
+                    style="display: flex; justify-content: space-between; padding-left: 4px; padding-right: 4px; font-weight: bold;">
+                    Sub Total: <span id="SubTotal"></span>
+                </div>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="4" style="border-top: none;">
+                <div id="bankInfo" style="padding: 2px;">
+                    <div>
+                        <b>Bank Name :</b> <span>ABC Bank of India</span>
+                    </div>
+                    <div style="padding-top: 1px; padding-bottom: 1px;">
+                        <b>Bank A/C No. :</b> <span>1234567890</span>
+                    </div>
+                    <div>
+                        <b>RTGS/IFSC Code :</b> <span>ABCB1234</span>
+                    </div>
+
+
+                </div>
+
+            </td>
+            <td colspan="3" rowspan="2" style="border-top: none; border-left: none;">
+                <div id="Totals" style="padding: 2px;">
+                    <div id="taxableamount" class="final_totals">
+                        <b>Taxable Amount</b> <span id="txblAmt"></span>
+                    </div>
+                    <div id="gsts">
+                        <div id="finalSgsts" class="final_totals">
+                            <b>SGST</b> <span>9.0%</span> <span id="finalSgst"></span>
+                        </div>
+                        <div id="finalCgsts" class="final_totals">
+                            <b>CGST</b><span>9.0%</span> <span id="finalCgst"></span>
+                        </div>
+                        <div id="roundofff" class="final_totals">
+                            <b>round Off</b> <span id="finalRoundOff">0</span>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+
+        <tr>
+
+            <td colspan="4" style="border-top: none;">
+                <div id="inWords" style="padding: 2px;">
+                    <div id="TotalGST" class="final_totals">
+                        <b>Total GST: </b><span class="small_font" id="FinalGST" style="font-size:small;"></span>
+                    </div>
+                    <div id="BillAmount" class="final_totals">
+                        <b>Bill Amount: </b><span class="small_font" id="FinalBill" style="font-size:small;"></span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+
+            <td colspan="4" rowspan="2" style="border-top: none;">
+                <div id="RateWiseSummery" style="padding: 2px;">
+                    <h3>Rate Wise Summary :</h3>
+                    <table style="width: 80%; height: 50%; margin-left: 20%; text-align: center; margin-top: 10px;">
+                        <tr>
+                            <td style="border: none;">Per%</td>
+                            <td style="border: none;">Taxable Value</td>
+
+                            <td style="border: none;">CGST Amount</td>
+
+                            <td style="border: none;">SGST Amount</td>
+                        </tr>
+                        <tr id="RateWise">
+                            <td style="border: none;" >
+                                <span class="GST%">18.00%</span>
+                            </td>
+                            <td style="border: none;">
+                                00000
+                            </td>
+
+                            <td style="border: none;" class="finalCgst">
+                                000000
+                            </td>
+                            <td style="border: none;" class="finalSgst">
+                                00000
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td colspan="3" rowspan="1" style="border:none;">
+                <div id="GTotal">
+                    <h3>Grand Total</h3><span id="FinalGrandTotal" style="font-weight: bold; font-size: 16px; padding-top: 1px"></span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" style="border-left: none; padding: 2px; ">
+            <div id="note" >
+                <b>Note: </b>
+                <p>
+                    
+                </p>
+            </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="7" style="border-top: none;">
+                <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 4px; padding-left: 10px; margin: 4px;">
+                    <div id="terms">
+                        <b>Terms & Conditions: </b>
+                        <ol type="1" style="font-size: small;">
+                            <li>Goods once sold will not be taken back.</li>
+                            <li>Interest @18% p.a. will be charged if payment is not made within due date.</li>
+                            <li>Our risk and responsibility ceases as soon as the goods leave our premises.</li>
+                            <li>"Subject to 'Pune' Jurisdiction only. E.&.Ο.Ε"</li>
+                        </ol>
+                    </div>
+                    <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
+                        <Label>For POOJA SALES</Label>
+                        <label style="font-size: small; margin-top: 2px;">(Authorised Signatory)</label>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <script src="src/bill.js"></script>
+</body>
+
+</html>
