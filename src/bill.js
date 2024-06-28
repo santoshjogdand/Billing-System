@@ -31,30 +31,31 @@ let date = document.getElementById("bDate")
 date.textContent = getFormattedDate()
 
 
-
-custName.textContent = CustomerData.first_name+" "+CustomerData.last_name
+    custName.textContent = CustomerData.first_name+" "+CustomerData.last_name
+if (custName.textContent == "undefined undefined") {
+        custName.textContent = '';
+} 
 CustAddress.textContent = CustomerData.address
 CustPhoneNumber.textContent = CustomerData.ph_no
 CustPhoneNumber.textContent = CustomerData.ph_no
-InvoiceNo.textContent = "GT/"+ProductsData[2]
-SubTotal.textContent = ProductsData[1].SubTotal
-TaxableAmount.textContent = (Number(ProductsData[1].SubTotal)).toFixed(3)
-let gst = (9/100)*ProductsData[1].SubTotal
+InvoiceNo.textContent = "GT/"+ProductsData[ProductsData.length-1]
+SubTotal.textContent = ProductsData[ProductsData.length-2].SubTotal
+TaxableAmount.textContent = (Number(ProductsData[ProductsData.length-2].SubTotal)).toFixed(3)
+let gst = Number((9/100)*ProductsData[ProductsData.length-2].SubTotal)
+console.log(gst)
 Cgst.textContent = gst.toFixed(3)
 Sgst.textContent = gst.toFixed(3)
 let Fgst = Number((Number(gst)+Number(gst)).toFixed(3))
-FinalGST.textContent =  numberToWordsINR(Fgst)
+console.log(Fgst)
+FinalGST.textContent =  numberToWordsINR(Number(Fgst))
 RoundOff.textContent = ProductsData[1].roundOff 
-FinalBill.textContent = numberToWordsINR(ProductsData[1].GrandTotal)
-FinalGrandTotal.textContent =addCommas(Number((ProductsData[1].GrandTotal)).toFixed(2))
-RateWise[1].textContent = (Number(ProductsData[1].SubTotal)).toFixed(3)
+FinalBill.textContent = numberToWordsINR(Number(ProductsData[ProductsData.length-2].GrandTotal))
+FinalGrandTotal.textContent =addCommas(Number((ProductsData[ProductsData.length-2].GrandTotal)).toFixed(2))
+console.log(FinalGrandTotal.textContent)
+RateWise[1].textContent = (Number(ProductsData[ProductsData.length-2].SubTotal)).toFixed(3)
 RateWise[2].textContent = gst.toFixed(3)
-RateWise[3].textContent = gst.toFixed(3)
+RateWise[3].textContent = gst.toFixed(3)    
 GSTIN.textContent = CustomerData.gstin
-console.log(RateWise)
-
-
-console.log(ProductsData[1].SubTotal)
 
 srnoele.innerHTML = ''
 ProductNames.innerHTML = ''
@@ -122,7 +123,8 @@ function numberToWordsINR(num) {
         if (n < 1000) return belowTen[Math.floor(n / 100)] + ' hundred' + (n % 100 ? ' ' + helper(n % 100) : '');
         if (n < 100000) return helper(Math.floor(n / 1000)) + ' thousand' + (n % 1000 ? ' ' + helper(n % 1000) : '');
         if (n < 10000000) return helper(Math.floor(n / 100000)) + ' lakh' + (n % 100000 ? ' ' + helper(n % 100000) : '');
-        return helper(Math.floor(n / 10000000)) + ' crore' + (n % 10000000 ? ' ' + helper(n % 10000000) : '');
+        if (n < 1000000000) return helper(Math.floor(n / 10000000)) + ' crore' + (n % 10000000 ? ' ' + helper(n % 10000000) : '');
+        return '';
     }
 
     function convertDecimal(decimal) {
@@ -151,6 +153,11 @@ function numberToWordsINR(num) {
 
     return capitalizeFirstLetter(result + ' only');
 }
+
+// Example usage
+const num = 112.012; // example amount
+console.log(numberToWordsINR(3030)); // Output: "One Hundred Twelve Rupees And One Paisa Only"
+
 function addCommas(num) {
     let numStr = num.toString();
     let parts = numStr.split('.');
