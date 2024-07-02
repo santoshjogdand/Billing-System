@@ -6,71 +6,69 @@
     <title>Billing System</title>
     <link rel="stylesheet" href="./src/output.css" />
   </head>
-  <body id="bodyele" class="bg-[#0e0e11] flex justify-center flex-col text-white w-screen h-screen overflow-hidden overflow-scroll">
-    <div id="header" class="flex w-screen justify-center fixed border-b-[1px] border-[#3b82f6] top-0 backdrop-blur-3xl bg-black">
-      <h1 class="md:text-4xl text-2xl p-5 font-semibold text-white shadow-lg w-screen flex justify-center text-center items-center h-5"><span class="text-white text-4xl">P</span>ooja &nbsp; <span class="text-white text-4xl">S</span>ales</h1>
-    </div>w-full
-    <Div class="flex m-5 md:mt-[100px] mt-[150px]">
-      <h2 class="md:text-3xl text-xl font-medium">GST Invoice</h2>
-    </Div>
-    <div id="main" class="flex justify-center w-screen bottom-[1px] md:mt-10 border-white h-[100%] z-1">
-      <div id="container " class="flex flex-col md:w- w-screen items-center">
+  <body id="bodyele" class="bg-[#e4e4e499] flex justify-center flex-col text-white w-screen h-screen">
+    <div id="header" class="flex w-screen justify-center fixed border-b-[1px] p-0 m-0 border-[#3b82f6] top-0 backdrop-blur-3xl bg-white z-30">
+      <!-- <h1 class="md:text-4xl text-2xl p-7 font-semibold text-black shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px] w-screen flex justify-center text-center items-center h-5"><span class="text-black text-4xl">P</span>ooja &nbsp; <span class="text-black text-4xl">S</span>ales</h1>
+        -->
+      <img src="src/logo2.png" class="w-56 py-2 m-0" alt="">
+    </div>
 
-        <div id="info" class="flex md:flex-row flex-col font-semibold mx-8 justify-between md:items-center md:w-[90%] w-[90%] bg-blue-500 md:p-4 p-10">
+    <div id="main" class="flex justify-center w-screen bottom-[1px] md:mt-10 border-white h-[100%] z-20 ">
+
+      <div id="container " class="flex flex-col md:w- w-screen items-center">
+        <Div class="mt-14 mb-3 z-20">
+          <h2 class="md:text-3xl text-xl text-black font-medium">GST Invoice</h2>
+        </Div>
+
+        <div id="info" class="flex md:flex-row flex-col font-semibold shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] text-black justify-around md:items-center md:w-[90%] w-[90%] bg-white md:p-4 p-10">
           <label for="invoice_no" class="md:m-0 mb-2 ">Invoice No: </label>
-          <input id="invoice_no" class=" h-8 p-4 outline-none text-black" type="text" placeholder="#No" >
+          <input id="invoice_no" class=" h-8 md:h-10 border-b-[2px] bg-blue-200 bg-opacity-40 border-blue-500 p-4 outline-none text-black md:w-16" type="text" placeholder="#No" >
 
           <label for="CustomerName" class=" mb-2 mt-2">Customer Name: </label>
-            <select id="CustomerName" class="h-8 md:m-0 outline-none bg-white px-3 text-black ">
-                <option value="defaults" class="text-gray-900 text-sm" selected>Select Customer</option>
+            <select id="CustomerName" class="h-8 md:h-10  md:m-0 outline-none md:w-72  border-b-[2px] border-blue-500 bg-blue-200 bg-opacity-40 px-3 text-black ">
+                <option value="defaults" class="text-gray-900 text-sm " selected>Select Customer</option>
             </select>
-            <input type="button" id="AddCustomer" class="md:m-0 mb-2 mt-2 h-8 md:px-2 text-black bg-white" value="+">
+            <input type="button" id="AddCustomer" class="md:m-0 mb-2 mt-2 h-8 md:h-10  md:px-2 border-b-[2px] bg-blue-200 bg-opacity-40 border-blue-500 text-black " value="+">
             
-          <label for="MobileNo">Mobile No: </label>  <span id="MobileNo" class="HardInfo  mb-2 mt-2 h-8 text-black bg-white px-3 pt-1" disabled></span>
+          <label for="MobileNo">Mobile No: </label>  <span id="MobileNo" class="HardInfo flex items-center border-b-[2px] bg-blue-200 bg-opacity-40 border-blue-500 mb-2 mt-2 h-8 md:h-10 md:w-52  text-black px-3 pt-1" disabled></span>
 
-          <label for="Date">Date : </label> <span id="Date" class="HardInfo mb-2 mt-2 h-8 text-black bg-white px-3 pt-1" disabled></span>
+          <label for="Date">Date : </label> <span id="Date" class="HardInfo mb-2 mt-2 h-8 flex items-center md:h-10 border-b-[2px] bg-blue-200 bg-opacity-40 border-blue-500 text-black px-3 pt-1" disabled></span>
 
         </div>
         <Div class="flex flex-row mt-5 md:w-[100%] w-screen">
-          <h2 class="md:text-3xl text-xl font-medium ml-5">Add Products</h2>
+          <h2 class="md:text-3xl text-xl text-black font-medium ml-5">Add Products</h2>
         </Div>
-        <div id="bill_info" class="md:w-[90%] w-screen mt-3 pb-[100px]">
+        <div id="bill_info" class="md:w-[90%] w-screen">
 
-            <div class="billInput flex flex-col items-center justify-center w-screen p-0 md:w-full w-screen h-auto">
-              <div id="ProductInfo" class="flex my-2 md:flex-row flex-col font-semibold justify-between md:items-center md:w-[99%] w-[90%] h-auto bg-blue-500 md:p-4 p-10">
+            <div class="billInput flex flex-col items-center justify-center p-0 md:w-full w-screen h-auto mb-14">
+              <div id="ProductInfo" class="flex md:flex-row  flex-col font-semibold justify-between md:items-center md:w-[99%] w-[90%] h-auto bg-blue-500 md:p-4 p-10 my-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]">
                 <label>Sr No.</label>
-                <input class="md:m-0 md:w-[50px] mb-2 mt-2 h-8 text-black bg-white md:px-3 px-4" type="text" field="srNo" placeholder="1" disabled>
+                <input class="md:m-0 md:w-[50px] mb-2 mt-2 h-8 md:h-10  text-black bg-white md:px-3 px-4" type="text" field="srNo" placeholder="1" disabled>
                 
                 <label >Product</label>
-                <select field="Product" class="productClass md:m-0 md:w-50 mb-2 mt-2 h-8 text-black bg-white px-4 " onchange="getSelectedProduct(1)" placeholder="Product">
-                  <option selected>Select Product</option>
+                <select field="Product" class="productClass md:m-0 md:w-50 mb-2 mt-2 h-8 md:h-10  text-black bg-white px-4 " onchange="getSelectedProduct(1)" placeholder="Product">
+                  <option value="" selected>Select Product</option>
                 </select>         
 
                 <label >Qty</label>
-                <input type="text" field="Qty" class="qtyClass md:m-0 md:w-24 mb-2 mt-2 h-8 text-black bg-white px-4 " oninput="fillTotals()" placeholder="Quantity" >      
+                <input type="number" field="Qty" class="qtyClass outline-none md:m-0 md:w-24 mb-2 mt-2 h-8 md:h-10  text-black bg-white px-4 " oninput="fillTotals()" placeholder="Quantity" min="1" max="999">      
 
                 <label >Rate</label>
-                <input type="text" field="Rate" class="rateClass md:m-0 md:w-24 mb-2 mt-2 h-8 text-black bg-white px-4 "  placeholder="0" disabled>
+                <input type="number" field="Rate" class="rateClass md:m-0 md:w-24 mb-2 mt-2 h-8 md:h-10  text-black bg-white px-4 "  placeholder="0" disabled>
 
                 <label>Total</label>
-                <input type="text" field="Total" class="totalClass md:m-0 md:w-[8rem] mb-2 mt-2 h-8 text-black bg-white px-4"  placeholder="Total" disabled >
+                <input type="number" field="Total" class="totalClass md:m-0 md:w-[8rem] mb-2 mt-2 h-8 md:h-10  text-black bg-white px-4"  placeholder="Total" disabled >
 
               </div>
             </div>
         </div>
 
-        <div class="buttons flex fixed bottom-0 bg-black md:w-full w-screen justify-between p-3 z-50 md:px-[7cm]">
-          <ion-icon size="large" onclick="AddNewProduct()" name="add-circle-outline"></ion-icon>
-          <ion-icon size="large" name="remove-circle-outline" onclick="removeLastProduct()"></ion-icon>
-          <ion-icon id="print" size="large" onclick="printBill()" name="print-outline"></ion-icon>
-          <ion-icon size="large"  name="refresh-circle-outline" value="Refresh" onclick="refresh()"></ion-icon>
-          <ion-icon size="large" name="reorder-two-outline"onclick="ShowTotals()"></ion-icon>
-        </div>
+
       </div>
 
     </div>
 
-    <div id="FinalValues" class="bottom-[6%] bottom-[-93%] transition-all ease-in-out duration-300 flex flex-col mt-10 justify-between w-full items-center  fixed bg-blue-400 bg-opacity-80 font-semibold backdrop-blur-lg p-10 z-40">
+    <div id="FinalValues" class="transition-all ease-in-out duration-300 flex flex-col rounded-3xl justify-between md:fixed md:w-[20rem] md:right-0 w-full items-center fixed bg-blue-400 bg-opacity-80 font-semibold backdrop-blur-lg p-10 mb-[30px] md:mr-[20px] z-30 bottom-[-100%]">
       <button onclick="ShowTotals()">Close</button>
       <div class="ValuesContainer flex mt-10 justify-between w-full items-center  ">
         <label for="TaxableAmount">Taxable Amount: </label>&nbsp;<span id="TaxableAmount" class="FinalValueElements"><b>0</b>
@@ -88,6 +86,13 @@
         <label for="GrandTotal">GrandTotal: </label>&nbsp;<span id="GrandTotal" class="FinalValueElements"><b>0</b></span>
       </div>  
     </div>  
+    <div class="buttons flex fixed bottom-0  bg-white md:w-full w-screen border-[1px] border-[#3b82f6] shadow-[rgba(13,_38,_76,_0.19)_15px_-2px_15px] justify-around p-3 z-50 md:px-[7cm]">
+      <ion-icon class="text-black" size="large" onclick="AddNewProduct()"  name="add-circle-outline"></ion-icon>
+      <ion-icon class="text-black" size="large" name="remove-circle-outline" onclick="removeLastProduct()"></ion-icon>
+      <ion-icon class="text-black" id="print" size="large" onclick="printBill()" name="print-outline"></ion-icon>
+      <ion-icon class="text-black" size="large"  name="refresh-circle-outline" value="Refresh" onclick="refresh()"></ion-icon>
+      <ion-icon class="text-black" size="large" name="reorder-two-outline"onclick="ShowTotals()"></ion-icon>
+    </div>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="./src/script.js"></script>

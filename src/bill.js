@@ -64,8 +64,9 @@ qtys.innerHTML = ''
 rates.innerHTML = ''
 gsts.innerHTML = ''
 amounts.innerHTML = ''
+let counter = 0
 for(let i = 0; i<ProductsData.length - 2; i++){
-    console.log(i+1)
+    if(!(''==ProductsData[i].pname)){
     let spanSr = document.createElement("span")
     let spanProduct = document.createElement("span")
     let spanHsn = document.createElement("span")
@@ -73,7 +74,7 @@ for(let i = 0; i<ProductsData.length - 2; i++){
     let spanqrate = document.createElement("span")
     let spangst = document.createElement("span")
     let spanamount = document.createElement("span") 
-    spanSr.textContent = i+1
+    spanSr.textContent = ++counter
     spanProduct.textContent = ProductsData[i].pname
     spanHsn.textContent = ProductsData[i].phsn
     spanqty.textContent = ProductsData[i].pqty  
@@ -90,12 +91,16 @@ for(let i = 0; i<ProductsData.length - 2; i++){
     rates.appendChild(spanqrate)
     gsts.appendChild(spangst)
     amounts.appendChild(spanamount)
-
+    }
+    else{
+        continue;
+    }
 
 }
 function printMe() {
     window.print();
 }
+let link = ''
 
 function generatePDF() {
     var element = document.getElementById('tab');
@@ -106,8 +111,8 @@ function generatePDF() {
         html2canvas:  { scale: 5 },
         jsPDF:        { unit: 'cm', format: 'a4', orientation: 'portrait' }
     };
-
-
+    // console.log(opt.filename)
+    // link = html2pdf().from(element).set(opt)
     html2pdf().from(element).set(opt).save();
 }
 
@@ -150,8 +155,11 @@ function numberToWordsINR(num) {
     if (paise > 0) {
         result += ` and ${helper(paise)}${paiseWord}`;
     }
+    if(!(num<1)){
+     return capitalizeFirstLetter(result + ' only');
+    }
+    return ''
 
-    return capitalizeFirstLetter(result + ' only');
 }
 
 // Example usage
@@ -164,6 +172,7 @@ function addCommas(num) {
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return parts.join('.');
 }
+
 
 function getFormattedDate() {
     const today = new Date();

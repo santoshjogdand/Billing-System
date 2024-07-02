@@ -251,55 +251,56 @@ let productsData = [
 
 let CustomerInfoEle = document.getElementById("info");
 let CustomerNameEle = document.getElementById("CustomerName");
-let DateEle = document.getElementById("Date")
-let selectedCustomer = new Object()
-let billInputEle = document.querySelector(".billInput")
-let currenProductNo = 1
-let SelectedProducts = new Array()
-let nofSelectedProducts = 0
-let pruductclassval = new Array()
+let DateEle = document.getElementById("Date");
+let selectedCustomer = new Object();
+let billInputEle = document.querySelector(".billInput");
+let currenProductNo = 1;
+let SelectedProducts = new Array();
+let nofSelectedProducts = 0;
+let pruductclassval = new Array();
 
-setCustomerInfo()
-setProductInfo()
+setCustomerInfo();
+setProductInfo();
 
-function setCustomerInfo(){
-  const array  = Array.from(CustomerInfoEle.children)
-  for(let i = 0; i<20; i++){
-    let val = CustomerData[i].first_name +" "+CustomerData[i].last_name 
-    let childOption = document.createElement("option")
-    childOption.setAttribute('value',val)
-    childOption.setAttribute('class',"text-gray-900 text-sm")
-    childOption.textContent = val
-    array[3].appendChild(childOption)
-    array[6].textContent = "Phone Number"
+function setCustomerInfo() {
+  const array = Array.from(CustomerInfoEle.children);
+  for (let i = 0; i < 20; i++) {
+    let val = CustomerData[i].first_name + " " + CustomerData[i].last_name;
+    let childOption = document.createElement("option");
+    childOption.setAttribute("value", val);
+    childOption.setAttribute("class", "text-gray-900 text-sm");
+    childOption.textContent = val;
+    array[3].appendChild(childOption);
+    array[6].textContent = "Phone Number";
   }
 }
-CustomerNameEle.addEventListener("change",()=>{setMobileNumberOfCustomer(CustomerNameEle.value)})
-function setMobileNumberOfCustomer(CustomerName){
-  const array  = Array.from(CustomerInfoEle.children)
-  for(let i = 0; i<20; i++){
-    let val = CustomerData[i].first_name +" "+CustomerData[i].last_name
-    if(CustomerName == val){
-      array[6].textContent = CustomerData[i].ph_no
-      array[6].disabled = true
-      selectedCustomer = CustomerData[i]
+CustomerNameEle.addEventListener("change", () => {
+  setMobileNumberOfCustomer(CustomerNameEle.value);
+});
+function setMobileNumberOfCustomer(CustomerName) {
+  const array = Array.from(CustomerInfoEle.children);
+  for (let i = 0; i < 20; i++) {
+    let val = CustomerData[i].first_name + " " + CustomerData[i].last_name;
+    if (CustomerName == val) {
+      array[6].textContent = CustomerData[i].ph_no;
+      array[6].disabled = true;
+      selectedCustomer = CustomerData[i];
       // console.log(selectedCustomer)
     }
   }
-
 }
-setDate()
-function setDate(){
+setDate();
+function setDate() {
   const today = new Date();
-  const day = String(today.getDate()).padStart(2, '0');
-  const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0
+  const day = String(today.getDate()).padStart(2, "0");
+  const month = String(today.getMonth() + 1).padStart(2, "0"); // January is 0
   const year = today.getFullYear();
 
-  DateEle.textContent = `${day}-${month}-${year}`
+  DateEle.textContent = `${day}-${month}-${year}`;
 }
 
-function AddNewProduct(){
-  currenProductNo++
+function AddNewProduct() {
+  currenProductNo++;
   let newEleInner = `<label>Sr No.</label>
                 <input class="md:m-0 md:w-[50px] mb-2 mt-2 h-8 text-black bg-white md:px-3 px-3" type="text" field="srNo" placeholder="${currenProductNo}" disabled>
                 
@@ -309,156 +310,186 @@ function AddNewProduct(){
                 </select>         
 
                 <label >Qty</label>
-                <input type="text" field="Qty" class="qtyClass md:m-0 md:w-24 mb-2 mt-2 h-8 text-black bg-white px-4 " oninput="fillTotals()" placeholder="Quantity" >      
+                <input type="number" field="Qty" class="qtyClass outline-none md:m-0 md:w-24 mb-2 mt-2 h-8 text-black bg-white px-4 " oninput="fillTotals()" placeholder="Quantity" >      
 
                 <label >Rate</label>
-                <input type="text" field="Rate" class="rateClass md:m-0 md:w-24 mb-2 mt-2 h-8 text-black bg-white px-4 "  placeholder="0" disabled>
+                <input type="number" field="Rate" class="rateClass md:m-0 md:w-24 mb-2 mt-2 h-8 text-black bg-white px-4 "  placeholder="0" disabled>
 
                 <label>Total</label>
-                <input type="text" field="Total" class="totalClass md:m-0 md:w-[8rem] mb-2 mt-2 h-8 text-black bg-white px-4"  placeholder="Total" disabled >`
+                <input type="number" field="Total" class="totalClass md:m-0 md:w-[8rem] mb-2 mt-2 h-8 text-black bg-white px-4"  placeholder="Total" disabled >
+`;
 
-let BillInputClass = document.querySelector(".billInput")
-let ProductInfoELE = document.createElement("div")
-ProductInfoELE.setAttribute("id","ProductInfo")
-ProductInfoELE.setAttribute("class","flex my-2 md:flex-row flex-col font-semibold justify-between md:items-center md:w-[99%] w-[90%] h-auto bg-blue-500 md:p-4 p-10")
-ProductInfoELE.setAttribute("productNo",currenProductNo)
-ProductInfoELE.innerHTML = newEleInner
-// console.log(ProductInfoELE)
-BillInputClass.appendChild(ProductInfoELE)
-setProductInfo()
-
+  let BillInputClass = document.querySelector(".billInput");
+  let ProductInfoELE = document.createElement("div");
+  ProductInfoELE.setAttribute("id", "ProductInfo");
+  ProductInfoELE.setAttribute(
+    "class",
+    "flex md:flex-row flex-col font-semibold justify-between md:items-center md:w-[99%] w-[90%] h-auto bg-blue-500 md:p-4 p-10 my-3 shadow-[rgba(50,50,93,0.25)_0px_6px_12px_-2px,_rgba(0,0,0,0.3)_0px_3px_7px_-3px]"
+  );
+  ProductInfoELE.setAttribute("productNo", currenProductNo);
+  ProductInfoELE.innerHTML = newEleInner;
+  // console.log(ProductInfoELE)
+  BillInputClass.appendChild(ProductInfoELE);
+  setProductInfo();
 }
-function removeLastProduct(){
-  let BillInputClass = document.querySelector(".billInput")
-  let array = Array.from(BillInputClass.children)
+function removeLastProduct() {
+  let BillInputClass = document.querySelector(".billInput");
+  let array = Array.from(BillInputClass.children);
   // console.log(array,currenProductNo)
   // console.log(array[1])
-  
-  for(let i = 0; i<array.length; i++){
+
+  for (let i = 0; i < array.length; i++) {
     // console.log(array[i].getAttribute("productno"))
-    if(array[i].getAttribute("productno") == currenProductNo){
-      array[i].remove()
-      currenProductNo--
-      SelectedProducts[--nofSelectedProducts]
+    if (array[i].getAttribute("productno") == currenProductNo) {
+      array[i].remove();
+      currenProductNo--;
+      SelectedProducts[--nofSelectedProducts];
     }
   }
-  
-
 }
 
-function setProductInfo(){
-  let productClassEle = document.querySelectorAll(".productClass")
-  productClassEle.forEach(productClass=>{
-
-    for(let i = 0; i<20; i++){
-      let ProductOptionsEle = document.createElement("option")
-      ProductOptionsEle.value = productsData[i].product +" "+productsData[i].qty
-      ProductOptionsEle.textContent = productsData[i].product+" "+productsData[i].qty
-      productClass.appendChild(ProductOptionsEle)
+function setProductInfo() {
+  let productClassEle = document.querySelectorAll(".productClass");
+  productClassEle.forEach((productClass) => {
+    for (let i = 0; i < 20; i++) {
+      let ProductOptionsEle = document.createElement("option");
+      ProductOptionsEle.value =
+        productsData[i].product + " " + productsData[i].qty;
+      ProductOptionsEle.textContent =
+        productsData[i].product + " " + productsData[i].qty;
+      productClass.appendChild(ProductOptionsEle);
     }
-
-  })
-
+  });
 }
 
-
-function getSelectedProduct(num){
-  let SelectedProduct = ''
-  let rate = ''
-  let array = document.querySelectorAll(".productClass")
+function getSelectedProduct(num) {
+  let SelectedProduct = "";
+  let rate = "";
+  let array = document.querySelectorAll(".productClass");
   // console.log(array,num)
-  SelectedProduct = array[num-1].value
+  SelectedProduct = array[num - 1].value;
   // console.log(SelectedProduct)
-  let array2 = Array.from((array[num-1].parentElement).children)
+  let array2 = Array.from(array[num - 1].parentElement.children);
   // console.log(array2)
-  rate = array2[7].value = getProductRate(SelectedProduct)
+  rate = array2[7].value = getProductRate(SelectedProduct);
   // console.log(SelectedProducts)
-fillTotals()
-  }
-function getProductRate(ProductName){
-let rate
-  for(let i = 0; i<20; i++){
-    let fetched = productsData[i].product+" "+productsData[i].qty
-    if(ProductName == fetched){
-      rate = productsData[i].rate
+  fillTotals();
+}
+function getProductRate(ProductName) {
+  let rate;
+  for (let i = 0; i < 20; i++) {
+    let fetched = productsData[i].product + " " + productsData[i].qty;
+    if (ProductName == fetched) {
+      rate = productsData[i].rate;
     }
   }
 
-return rate
+  return rate;
 }
-function gethsn(name){
-  for(let i = 0; i<=20; i++){
-    if(name == (productsData[i].product+" "+productsData[i].qty)){
-      return productsData[i].hsn
+function gethsn(name) {
+  for (let i = 0; i <= 20; i++) {
+    try {
+      if (name == productsData[i].product + " " + productsData[i].qty) {
+        return productsData[i].hsn;
+      }
+    } catch (error) {
+      continue;
     }
   }
 }
 
-function getValues(){
-  pruductclassval = []
-  let productClassEleVal= document.querySelectorAll(".productClass")
-  let productClassrate= document.querySelectorAll(".rateClass")
-  let productClassqty= document.querySelectorAll(".qtyClass")
-  let TotalClassqty= document.querySelectorAll(".totalClass")
+function getValues() {
+  pruductclassval = [];
+  let productClassEleVal = document.querySelectorAll(".productClass");
+  let productClassrate = document.querySelectorAll(".rateClass");
+  let productClassqty = document.querySelectorAll(".qtyClass");
+  let TotalClassqty = document.querySelectorAll(".totalClass");
 
-  let grandTotal = 0
-  let total = 0
-  for(let i = 0; i<productClassEleVal.length; i++){
-    let t = productClassrate[i].value*productClassqty[i].value
-    let hsn = gethsn(productClassEleVal[i].value)
-    pruductclassval.push({"pname":productClassEleVal[i].value,"phsn": hsn,"prate":productClassrate[i].value,"pqty":productClassqty[i].value,"Total":t})
-    total += (productClassrate[i].value * productClassqty[i].value)
-    TotalClassqty[i].value = (t).toFixed(3)
+  let grandTotal = 0;
+  let total = 0;
+  for (let i = 0; i < productClassEleVal.length; i++) {
+    if (!(productClassEleVal[i].value == "Select Product")) {
+      let t = productClassrate[i].value * productClassqty[i].value;
+      let hsn = gethsn(productClassEleVal[i].value);
+      pruductclassval.push({
+        pname: productClassEleVal[i].value,
+        phsn: hsn,
+        prate: productClassrate[i].value,
+        pqty: productClassqty[i].value,
+        Total: t,
+      });
+      total += productClassrate[i].value * productClassqty[i].value;
+      TotalClassqty[i].value = t.toFixed(3);
+    } else {
+      continue;
+    }
   }
-  let gst = total * (9/100)
-  let round = Math.round((gst*2) + total)
-  let roundOff = round - ((gst*2) + total)
-  grandTotal = (((gst*2) + total) + roundOff)
+  let gst = total * (9 / 100);
+  let round = Math.round(gst * 2 + total);
+  let roundOff = round - (gst * 2 + total);
+  grandTotal = gst * 2 + total + roundOff;
 
-
-  pruductclassval.push({"SubTotal": (total).toFixed(3),"gst":(gst).toFixed(3),"roundOff":(roundOff).toFixed(3), "GrandTotal": (grandTotal).toFixed(3)})
-
-
+  pruductclassval.push({
+    SubTotal: total.toFixed(3),
+    gst: gst.toFixed(3),
+    roundOff: roundOff.toFixed(3),
+    GrandTotal: grandTotal.toFixed(3),
+  });
 }
 
-function fillTotals(){
-  getValues()
-  let FinalValueElements = document.querySelectorAll(".FinalValueElements")
-  FinalValueElements[0].innerHTML = `<b>${pruductclassval[pruductclassval.length-1].SubTotal}</b>`
-  FinalValueElements[1].innerHTML = `<b>${pruductclassval[pruductclassval.length-1].gst}</b>`
-  FinalValueElements[2].innerHTML = `<b>${pruductclassval[pruductclassval.length-1].gst}</b>`
-  FinalValueElements[3].innerHTML = `<b>${pruductclassval[pruductclassval.length-1].roundOff}</b>`
-  FinalValueElements[4].innerHTML = `<b>${pruductclassval[pruductclassval.length-1].GrandTotal}</b>`
+function fillTotals() {
+  getValues();
+  let FinalValueElements = document.querySelectorAll(".FinalValueElements");
+  FinalValueElements[0].innerHTML = `<b>${
+    pruductclassval[pruductclassval.length - 1].SubTotal
+  }</b>`;
+  FinalValueElements[1].innerHTML = `<b>${
+    pruductclassval[pruductclassval.length - 1].gst
+  }</b>`;
+  FinalValueElements[2].innerHTML = `<b>${
+    pruductclassval[pruductclassval.length - 1].gst
+  }</b>`;
+  FinalValueElements[3].innerHTML = `<b>${
+    pruductclassval[pruductclassval.length - 1].roundOff
+  }</b>`;
+  FinalValueElements[4].innerHTML = `<b>${
+    pruductclassval[pruductclassval.length - 1].GrandTotal
+  }</b>`;
 
   // FinalValueElements[0].innerHTML = `<b>${pruductclassval[0].SubTotal}</b>`
   // console.log(FinalValueElements)
 }
 
-function printBill(){
-try {
-  getValues()
-  pruductclassval.push(document.getElementById("invoice_no").value)
-  // console.log(pruductclassval)
-  console.log(selectedCustomer)
-localStorage.setItem('ProductValues', JSON.stringify(pruductclassval));
-localStorage.setItem('CustomerValues', JSON.stringify(selectedCustomer));
-// localStorage.setItem('CustomerValues', JSON.stringify(selectedCustomer));
-console.log('Data stored in Local Storage');
- window.location.href = 'bill2.html'
-  
-} catch (error) {
-  alert("Something is missing!")
+function printBill() {
+  try {
+    getValues();
+    pruductclassval.push(document.getElementById("invoice_no").value);
+    // console.log(pruductclassval)
+    console.log(selectedCustomer);
+    localStorage.setItem("ProductValues", JSON.stringify(pruductclassval));
+    localStorage.setItem("CustomerValues", JSON.stringify(selectedCustomer));
+    // localStorage.setItem('CustomerValues', JSON.stringify(selectedCustomer));
+    console.log("Data stored in Local Storage");
+    window.location.href = "bill2.html";
+  } catch (error) {
+    alert("Something is missing!");
+  }
 }
 
+function ShowTotals() {
+  let fv = document.getElementById("FinalValues");
+  let body = document.getElementById("bodyele");
+  let main = document.getElementById("main");
+  fv.classList.toggle("bottom-0");
+  // fv.classList.toggle("md:bottom-[30%]");
+  fv.classList.toggle("bottom-[-100%]");
+  body.classList.toggle("overflow-hidden");
+  main.classList.toggle("overflow-hidden");
+  main.addEventListener('click',()=>{
+    ShowTotals()
+  })
 }
 
-function ShowTotals(){
-  let fv = document.getElementById("FinalValues")
-  let body = document.getElementById("bodyele")
-  fv.classList.toggle("bottom-[-93%]")
-  body.classList.toggle("overflow-scroll")
-}
-
-function refresh(){
+function refresh() {
   location.reload();
 }
